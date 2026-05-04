@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('device_assignments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('device_id')->constrained('devices')->cascadeOnDelete();
+            $table->foreignId('employee_id')->constrained('employees')->cascadeOnDelete();
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
+            $table->enum('status', ['active', 'returned', 'lost', 'damaged'])->default('active');
             $table->timestamps();
         });
     }

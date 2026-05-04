@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('device_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('device_id')->constrained('devices')->cascadeOnDelete();
+            $table->string('key');
+            $table->string('value');
             $table->timestamps();
         });
     }
