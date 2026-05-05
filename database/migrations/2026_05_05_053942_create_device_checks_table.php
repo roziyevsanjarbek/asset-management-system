@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('device_details', function (Blueprint $table) {
+        Schema::create('device_checks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('device_id')->constrained('devices')->cascadeOnDelete();
-            $table->string('key')->nullable();
-            $table->string('value')->nullable();
+            $table->foreignId('device_assignment_id')->constrained('device_assignments')->cascadeOnDelete();
+            $table->date('check_date');
+            $table->enum('status', ['present', 'missing'])->default('present');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('device_details');
+        Schema::dropIfExists('device_checks');
     }
 };
