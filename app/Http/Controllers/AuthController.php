@@ -82,10 +82,15 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:8|max:255',
         ]);
-        $user = User::query()->where('email', $request->email)->first();
 
-        if(!Hash::check($request->password, $user->password)){
-            return response()->json(['error' => 'Unauthorized'], 401);
+        $user = User::query()
+            ->where('email', $request->email)
+            ->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'error' => 'Unauthorized'
+            ], 401);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
