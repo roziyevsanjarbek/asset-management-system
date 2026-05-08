@@ -72,7 +72,7 @@ class EmployeeController extends Controller
      *         required=true,
      *
      *         @OA\JsonContent(
-     *             required={"full_name","email","phone"},
+     *             required={"full_name","email","phone_number"},
      *
      *             @OA\Property(
      *                 property="full_name",
@@ -86,7 +86,8 @@ class EmployeeController extends Controller
      *                 example="john@example.com"
      *             ),
      *             @OA\Property(
-     *                 property="phone",
+     *                 property="phone_number",
+     *                 description="Phone number with country code",
      *                 type="string",
      *                 example="+998901234567"
      *             )
@@ -105,7 +106,7 @@ class EmployeeController extends Controller
      *                 @OA\Property(property="id", type="integer", example=1),
      *                 @OA\Property(property="full_name", type="string", example="John Doe"),
      *                 @OA\Property(property="email", type="string", example="john@example.com"),
-     *                 @OA\Property(property="phone", type="string", example="+998901234567")
+     *                 @OA\Property(property="phone_number", type="string", example="+998901234567")
      *             )
      *         )
      *     ),
@@ -131,7 +132,7 @@ class EmployeeController extends Controller
         $request->validate([
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email',
-            'phone' => 'required|string|max:20',
+            'phone_number' => 'required|string|max:20',
         ]);
 
         $employee = $this->employeeService->create($request->all());
@@ -228,7 +229,7 @@ class EmployeeController extends Controller
      *         required=true,
      *
      *         @OA\JsonContent(
-     *             required={"full_name","email","phone"},
+     *             required={"full_name","email","phone_number"},
      *
      *             @OA\Property(
      *                 property="full_name",
@@ -242,7 +243,8 @@ class EmployeeController extends Controller
      *                 example="john@example.com"
      *             ),
      *             @OA\Property(
-     *                 property="phone",
+     *                 property="phone_number",
+     *                 description="Phone number with country code",
      *                 type="string",
      *                 example="+998901234567"
      *             )
@@ -261,7 +263,7 @@ class EmployeeController extends Controller
      *                 @OA\Property(property="id", type="integer", example=1),
      *                 @OA\Property(property="full_name", type="string", example="John Doe"),
      *                 @OA\Property(property="email", type="string", example="john@example.com"),
-     *                 @OA\Property(property="phone", type="string", example="+998901234567")
+     *                 @OA\Property(property="phone_number", type="string", example="+998901234567")
      *             )
      *         )
      *     ),
@@ -288,7 +290,7 @@ class EmployeeController extends Controller
         $request->validate([
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email',
-            'phone' => 'required|string|max:20',
+            'phone_number' => 'required|string|max:20',
         ]);
 
         $user = auth()->user();

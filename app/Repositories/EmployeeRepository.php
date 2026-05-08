@@ -8,7 +8,7 @@ class EmployeeRepository
 {
     public function getAll()
     {
-        return Employee::query()->with('role')->get();
+        return Employee::query()->get();
     }
 
     public function create(array $data)

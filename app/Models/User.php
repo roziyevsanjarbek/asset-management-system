@@ -28,4 +28,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function devices()
+    {
+        return $this->hasMany(Device::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }
