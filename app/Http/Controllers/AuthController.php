@@ -26,13 +26,13 @@ class AuthController extends Controller
      *                 property="email",
      *                 type="string",
      *                 format="email",
-     *                 example="user@example.com"
+     *                 example="admin@gamil.com"
      *             ),
      *             @OA\Property(
      *                 property="password",
      *                 type="string",
      *                 format="password",
-     *                 example="password123"
+     *                 example="password"
      *             )
      *         )
      *     ),
