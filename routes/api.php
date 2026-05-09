@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DeviceTypeController;
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Http\Request;
@@ -27,5 +28,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/employees/{id}', [EmployeeController::class, 'update']);
     Route::delete('/employees/{id}', [EmployeeController::class, 'destroy']);
 
+    Route::get('/devices', [DeviceController::class, 'index']);
+    Route::post('/devices', [DeviceController::class, 'store']);
+    Route::get('/devices/{id}', [DeviceController::class, 'show']);
+    Route::put('/devices/{id}', [DeviceController::class, 'update']);
+    Route::delete('/devices/{id}', [DeviceController::class, 'destroy']);
 
 });

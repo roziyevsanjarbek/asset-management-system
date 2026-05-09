@@ -136,6 +136,298 @@
                 ]
             }
         },
+        "/api/devices": {
+            "get": {
+                "tags": [
+                    "Devices"
+                ],
+                "summary": "Get all devices",
+                "operationId": "fdbb50bf1d0489887b3b8c2e17c48923",
+                "responses": {
+                    "200": {
+                        "description": "List of devices",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "device": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "device_type_id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "serial_number": {
+                                                        "type": "string",
+                                                        "example": "SN123456"
+                                                    },
+                                                    "inventory_number": {
+                                                        "type": "string",
+                                                        "example": "INV001"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "HP Laptop"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Devices"
+                ],
+                "summary": "Create device",
+                "operationId": "47d82c79b47be5f356407f0c9b09da80",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "device_type_id",
+                                    "serial_number",
+                                    "inventory_number",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "device_type_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "serial_number": {
+                                        "type": "string",
+                                        "example": "SN123456"
+                                    },
+                                    "inventory_number": {
+                                        "type": "string",
+                                        "example": "INV001"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "HP Laptop"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Device created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/devices/{id}": {
+            "get": {
+                "tags": [
+                    "Devices"
+                ],
+                "summary": "Get single device",
+                "operationId": "b004716f2d350e801eb4bb5cfae42aa3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Device ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Device details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Device not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Devices"
+                ],
+                "summary": "Update device",
+                "operationId": "4563e9a73c36c6b43f1bd9d71489f32d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Device ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "device_type_id",
+                                    "serial_number",
+                                    "inventory_number",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "device_type_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "serial_number": {
+                                        "type": "string",
+                                        "example": "SN123456"
+                                    },
+                                    "inventory_number": {
+                                        "type": "string",
+                                        "example": "INV001"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "HP Laptop"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Device updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Devices"
+                ],
+                "summary": "Delete device",
+                "operationId": "6ed86c27f475d7a79c802c50f54fa762",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Device ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Device deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/device-types": {
             "get": {
                 "tags": [
@@ -698,6 +990,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Devices",
+            "description": "Device management endpoints"
+        },
         {
             "name": "Device Types",
             "description": "API Endpoints for Device Types"
