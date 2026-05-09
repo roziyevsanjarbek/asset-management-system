@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\DeviceDetailController;
 use App\Http\Controllers\DeviceTypeController;
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Http\Request;
@@ -33,5 +34,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/devices/{id}', [DeviceController::class, 'show']);
     Route::put('/devices/{id}', [DeviceController::class, 'update']);
     Route::delete('/devices/{id}', [DeviceController::class, 'destroy']);
+
+    Route::get('/device-details', [DeviceDetailController::class, 'index']);
+    Route::post('/device-details', [DeviceDetailController::class, 'store']);
+    Route::get('/device-details/{id}', [DeviceDetailController::class, 'show']);
+    Route::put('/device-details/{id}', [DeviceDetailController::class, 'update']);
+    Route::delete('/device-details/{id}', [DeviceDetailController::class, 'destroy']);
 
 });
