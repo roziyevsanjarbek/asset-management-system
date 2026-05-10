@@ -33,4 +33,15 @@ class DeviceRepository
     {
         return $device->delete();
     }
+
+    public function findByInventoryNumber($inventoryNumber): ?Device
+    {
+        return Device::query()->where('inventory_number', $inventoryNumber)->first();
+    }
+
+    public function findBySerialNumber($serialNumber): ?Device
+    {
+        return Device::query()->where('serial_number', $serialNumber)->first();
+
+    }
 }

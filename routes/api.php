@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DeviceAssignmentController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DeviceDetailController;
 use App\Http\Controllers\DeviceTypeController;
@@ -16,29 +17,13 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware(['auth:sanctum']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/device-types', [DeviceTypeController::class, 'index']);
-    Route::post('/device-types', [DeviceTypeController::class, 'store']);
-    Route::get('/device-types/{id}', [DeviceTypeController::class, 'show']);
-    Route::put('/device-types/{id}', [DeviceTypeController::class, 'update']);
-    Route::delete('/device-types/{id}', [DeviceTypeController::class, 'destroy']);
+    Route::resource('/device-types', DeviceTypeController::class);
 
+    Route::resource('/employees', EmployeeController::class);
 
-    Route::get('/employees', [EmployeeController::class, 'index']);
-    Route::post('/employees', [EmployeeController::class, 'store']);
-    Route::get('/employees/{id}', [EmployeeController::class, 'show']);
-    Route::put('/employees/{id}', [EmployeeController::class, 'update']);
-    Route::delete('/employees/{id}', [EmployeeController::class, 'destroy']);
+    Route::resource('/devices', DeviceController::class);
 
-    Route::get('/devices', [DeviceController::class, 'index']);
-    Route::post('/devices', [DeviceController::class, 'store']);
-    Route::get('/devices/{id}', [DeviceController::class, 'show']);
-    Route::put('/devices/{id}', [DeviceController::class, 'update']);
-    Route::delete('/devices/{id}', [DeviceController::class, 'destroy']);
+  Route::resource('/device-details', DeviceDetailController::class);
 
-    Route::get('/device-details', [DeviceDetailController::class, 'index']);
-    Route::post('/device-details', [DeviceDetailController::class, 'store']);
-    Route::get('/device-details/{id}', [DeviceDetailController::class, 'show']);
-    Route::put('/device-details/{id}', [DeviceDetailController::class, 'update']);
-    Route::delete('/device-details/{id}', [DeviceDetailController::class, 'destroy']);
-
+  Route::resource('/device-assignments', DeviceAssignmentController::class);
 });

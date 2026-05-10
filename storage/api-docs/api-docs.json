@@ -136,6 +136,222 @@
                 ]
             }
         },
+        "/api/device-assignments": {
+            "get": {
+                "tags": [
+                    "Device Assignments"
+                ],
+                "summary": "Get all device assignments",
+                "operationId": "dfcf4b5be34f546c39bc009447fabc10",
+                "responses": {
+                    "200": {
+                        "description": "List of device assignments"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Device Assignments"
+                ],
+                "summary": "Create device assignment",
+                "operationId": "d974b60afaa596c6ffc3d0af8557d056",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "device_id",
+                                    "employee_id",
+                                    "start_date",
+                                    "status"
+                                ],
+                                "properties": {
+                                    "device_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "employee_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2026-05-10"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2026-05-20"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Device assignment created successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/device-assignments/{id}": {
+            "get": {
+                "tags": [
+                    "Device Assignments"
+                ],
+                "summary": "Get single device assignment",
+                "operationId": "49b26ee1d995d74645ee9573acb0d46f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Device Assignment ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Device assignment found"
+                    },
+                    "404": {
+                        "description": "Device assignment not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Device Assignments"
+                ],
+                "summary": "Update device assignment",
+                "operationId": "3074dfa363926ef8df9499f72e23746e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Device Assignment ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "device_id",
+                                    "employee_id"
+                                ],
+                                "properties": {
+                                    "device_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "employee_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Device assignment updated successfully"
+                    },
+                    "404": {
+                        "description": "Device assignment not found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Device Assignments"
+                ],
+                "summary": "Delete device assignment",
+                "operationId": "edf3e1952ce6ca2eda1f3ad25eef7846",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Device Assignment ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Device assignment deleted successfully"
+                    },
+                    "404": {
+                        "description": "Device assignment not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/devices": {
             "get": {
                 "tags": [
@@ -1268,6 +1484,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Device Assignments",
+            "description": "Device Assignment API"
+        },
         {
             "name": "Devices",
             "description": "Device management endpoints"
