@@ -13,4 +13,10 @@ class Employee extends Model
         'email',
         'phone_number',
     ];
+
+
+    public function deviceAssignments()
+    {
+        return $this->hasMany(DeviceAssignment::class);
+    }
 }

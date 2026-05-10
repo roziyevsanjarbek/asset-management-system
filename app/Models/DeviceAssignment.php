@@ -15,4 +15,15 @@ class DeviceAssignment extends Model
         'end_date',
         'status',
     ];
+
+
+    public function device()
+    {
+        return $this->belongsTo(Device::class);
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }
