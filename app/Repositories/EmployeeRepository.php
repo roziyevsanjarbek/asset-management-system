@@ -8,7 +8,7 @@ class EmployeeRepository
 {
     public function getAll()
     {
-        return Employee::query()->get();
+        return Employee::with('devices.type')->get();
     }
 
     public function create(array $data)
@@ -18,7 +18,7 @@ class EmployeeRepository
 
     public function find($id)
     {
-        return Employee::query()->find($id);
+        return Employee::with('devices.type')->find($id);
     }
 
     public function update(Employee $employee, array $data)

@@ -28,5 +28,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::resource('/device-assignments', DeviceAssignmentController::class);
 
-    Route::post('/check-device/{employeeId}/device/{inventoryNumber}', [DeviceCheckController::class, 'checkDevice']);
+    Route::post('/check-device/{employeeId}/device/{deviceId}/{inventoryNumber}', [DeviceCheckController::class, 'checkDevice']);
 });

@@ -19,4 +19,16 @@ class Employee extends Model
     {
         return $this->hasMany(DeviceAssignment::class);
     }
+
+    public function devices()
+    {
+        return $this->belongsToMany(
+            Device::class,
+            'device_assignments',
+            'employee_id',
+            'device_id'
+        )
+            ->withPivot(['start_date', 'end_date'])
+            ->withTimestamps();
+    }
 }

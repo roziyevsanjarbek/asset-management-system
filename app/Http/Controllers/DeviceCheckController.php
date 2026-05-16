@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Device;
 use App\Models\DeviceAssignment;
 use App\Models\DeviceCheck;
+use App\Services\EmployeeService;
 use Illuminate\Http\Request;
 
 class DeviceCheckController extends Controller
 {
+
+    public function __construct(
+        private EmployeeService $employeeService,
+    ){}
     public function index()
     {
         $user = auth()->user();
@@ -29,42 +34,38 @@ class DeviceCheckController extends Controller
 
     }
 
-    public function checkDevice(int $employeeId, string $inventoryNumber){
+    public function checkDevice(int $employeeId, string $deviceId, string $inventoryNumber){
 
         $user = auth()->user();
         if (!$user) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        $device = Device::query()->where('inventory_number', $inventoryNumber)->first();
-
-        if(!$device){
-            return response()->json([
-                'success' => false,
-                'message' => 'Device not found',
-            ]);
-        }
-        $deviceAssignment = DeviceAssignment::query()
-            ->where('device_id', $device->id)
+        $employeeAssignment = DeviceAssignment::query()
+            ->with('device')
+            ->with('employee')
             ->where('employee_id', $employeeId)
+            ->where('device_id', $deviceId)
             ->first();
 
-        if(!$deviceAssignment){
-            return response()->json([
-                'success' => false,
-                'message' => 'Device not assigned',
-            ]);
+        if (!$employeeAssignment) {
+            return response()->json(['error' => 'Employee not assigned to the device'], 404);
         }
 
-        $deviceCheck = DeviceCheck::query()->create([
-            'device_assignment_id' => $deviceAssignment->id,
-            'check_date' => now(),
-            'status' => 'present',
-        ]);
+        if($employeeAssignment->device->inventory_number !== $inventoryNumber){
+            DeviceCheck::query()->updateOrCreate([
+                'device_assignment_id' => $employeeAssignment->id,
+                'status' => 'missing',
+            ]);
+            return response()->json(['error' => 'Inventory number does not match'], 404);
+        }else{
+            DeviceCheck::query()->updateOrCreate([
+                'device_assignment_id' => $employeeAssignment->id,
+                'status' => 'present',
+            ]);
 
-        return response()->json([
-            'success' => true,
-            'device_check' => $deviceCheck,
-        ]);
+            return response()->json(['success' => 'Device is present'], 200);
+        }
+
     }
 }
