@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             AdminSeeder::class,
             CompanySeeder::class,
+            DeviceTypeSeeder::class,
+            PositionSeeder::class,
         ]);
     }
 }
