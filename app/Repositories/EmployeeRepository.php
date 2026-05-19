@@ -8,7 +8,7 @@ class EmployeeRepository
 {
     public function getAll()
     {
-        return Employee::with(['devices.type', 'position', 'company'])->get();
+        return Employee::with(['devices.type', 'position', 'company'])->paginate(20);
     }
 
     public function create(array $data)

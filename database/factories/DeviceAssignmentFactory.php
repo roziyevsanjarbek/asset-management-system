@@ -32,7 +32,8 @@ class DeviceAssignmentFactory extends Factory
             'status' => fake()->randomElement([
                 'active',
                 'returned',
-                'repair',
+                'lost',
+                'damaged',
             ]),
         ];
     }

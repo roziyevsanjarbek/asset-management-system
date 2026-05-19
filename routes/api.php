@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DeviceAssignmentController;
 use App\Http\Controllers\DeviceCheckController;
 use App\Http\Controllers\DeviceController;
@@ -31,8 +32,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::resource('/positions', PositionController::class);
 
+    Route::resource('/companyies', CompanyController::class);
+
     Route::post('/check-device/{employeeId}/device/{deviceId}/{inventoryNumber}', [DeviceCheckController::class, 'checkDevice']);
 });
 
-
-Route::get('/test', [DeviceCheckController::class, 'test']);
