@@ -133,6 +133,8 @@ class EmployeeController extends Controller
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email',
             'phone_number' => 'required|string|max:20',
+            'position_id' => 'required|exists:positions,id',
+            'company_id' => 'required|exists:companies,id'
         ]);
 
         $employee = $this->employeeService->create($request->all());

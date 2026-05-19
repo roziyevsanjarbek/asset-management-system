@@ -31,4 +31,14 @@ class Employee extends Model
             ->withPivot(['start_date', 'end_date'])
             ->withTimestamps();
     }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
+    }
 }

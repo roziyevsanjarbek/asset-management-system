@@ -7,6 +7,7 @@ use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DeviceDetailController;
 use App\Http\Controllers\DeviceTypeController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PositionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +29,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::resource('/device-assignments', DeviceAssignmentController::class);
 
+    Route::resource('/positions', PositionController::class);
+
     Route::post('/check-device/{employeeId}/device/{deviceId}/{inventoryNumber}', [DeviceCheckController::class, 'checkDevice']);
 });
+
+
+Route::get('/test', [DeviceCheckController::class, 'test']);
