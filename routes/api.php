@@ -32,7 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::resource('/positions', PositionController::class);
 
-    Route::resource('/companyies', CompanyController::class);
+    Route::resource('/companies', CompanyController::class);
 
     Route::post('/check-device/{employeeId}/device/{deviceId}/{inventoryNumber}', [DeviceCheckController::class, 'checkDevice']);
 });
